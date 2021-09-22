@@ -1,4 +1,11 @@
-export const songList = [
+interface Song {
+  name: string
+  artist: string
+  url: string
+  imageUrl: string
+}
+
+export const songList: Song[] = [
   {
     name: "paris",
     artist: "Chainsmokers",
@@ -27,13 +34,13 @@ export function getRandomSong() {
 
 // -------------------- LocalStorage -----------------------------
 // Retrive Recently Listned Songs from localStorage
-export function getRecentSongsLocalStorage() {
+export function getRecentSongsLocalStorage(): Song[] {
   const songs = JSON.parse(localStorage.getItem("RECENT_SONGS"));
   return songs ? songs : [];
 }
 
 // save currentSong details to localStorage
-export function setRecentSongsLocalStorage(currentSong) {
+export function setRecentSongsLocalStorage(currentSong: Song) {
   let songs = getRecentSongsLocalStorage();
   if (songs.length === 5) songs.pop();
   // To remove if the current song already exists in localStorage
@@ -42,19 +49,19 @@ export function setRecentSongsLocalStorage(currentSong) {
 }
 
 // -------------------- sessionStorage -----------------------------
-export function getSongSessionStorage() {
+export function getSongSessionStorage(): Song[] {
   const songs = JSON.parse(sessionStorage.getItem("SONG_LIST"));
   return songs ? songs : [];
 }
 
-export function setSongSessionStorage(currentSong) {
+export function setSongSessionStorage(currentSong: Song) {
   let songs = getSongSessionStorage();
   songs = songs.filter((song) => song.name !== currentSong.name);
   songs.push(currentSong);
   sessionStorage.setItem("SONG_LIST", JSON.stringify(songs));
 }
 
-export function removeSongAndReturnSessionStorage(removeSong) {
+export function removeSongAndReturnSessionStorage(removeSong: Song) {
   let songs = getSongSessionStorage();
 
   let removedSongIndex = null;
@@ -69,17 +76,17 @@ export function removeSongAndReturnSessionStorage(removeSong) {
 }
 
 // pop the first song from sessionStorage
-export function getNextSong(index) {
+export function getNextSong(index: number) {
   let songs = getSongSessionStorage();
   return songs[index + 1];
 }
 
-export function getPreviousSong(index) {
+export function getPreviousSong(index: number) {
   let songs = getSongSessionStorage();
   return songs[index - 1];
 }
 
-export function playNewSong(index, newSong) {
+export function playNewSong(index: number, newSong: Song) {
   let [songList, removedSongIndex] = removeSongAndReturnSessionStorage(newSong);
   if (songList.length === 0 || index === -1) songList.push(newSong);
   else {

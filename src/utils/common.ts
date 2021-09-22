@@ -1,31 +1,31 @@
-export const handleError = (error) => {
+export const handleError = (error: string): void => {
   console.log(error);
   // alert(error);
 };
 
-export function isValidURL(string) {
+export function isValidURL(url: string) {
   try {
-    return Boolean(new URL(string));
+    return Boolean(new URL(url));
   } catch (e) {
     return false;
   }
 }
 
-export function getRandomWelcomeText(usename) {
+export function getRandomWelcomeText(username: string) {
   const welcomeTexts = [
-    `Hey ${usename}, continue listening to your Music`,
-    `Hey ${usename}, welcome back`,
+    `Hey ${username}, continue listening to your Music`,
+    `Hey ${username}, welcome back`,
   ];
   const randomIndex = Math.floor(Math.random() * welcomeTexts.length);
   return welcomeTexts[randomIndex];
 }
 
-export function capitalize(string) {
+export function capitalize(string: string) {
   let word = string.toLowerCase();
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-export function createNamesArray(name) {
+export function createNamesArray(name: string) {
   let names = [];
   let previous = "";
 
@@ -36,7 +36,7 @@ export function createNamesArray(name) {
   return names;
 }
 
-export function capitalizeAllWords(name) {
+export function capitalizeAllWords(name: string) {
   let words = name.split(" ");
   let capitalizedword = "";
 
@@ -49,9 +49,9 @@ export function capitalizeAllWords(name) {
   return capitalizedword;
 }
 
-export function createNamesArrayWithCaptitalizedWords(name) {
-  let capitalizedword = capitalizeAllWords(name);
-  let names = createNamesArray(capitalizedword);
+export function createNamesArrayWithCaptitalizedWords(name: string) {
+  const capitalizedword = capitalizeAllWords(name);
+  const names = createNamesArray(capitalizedword);
   return names;
 }
 
