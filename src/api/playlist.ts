@@ -1,4 +1,4 @@
-import { db, getServerTimeStamp } from "../firebase";
+import { db, getServerTimeStamp } from "../firebase.example";
 import { getRandomPlaylistImage } from "../utils/common";
 
 export const createNewPlaylist = (name, uid) => {

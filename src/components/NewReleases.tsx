@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/row.css";
-import Song from "./Song";
+import Song from "./Song.tsx";
 
 import { CircularProgress } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";

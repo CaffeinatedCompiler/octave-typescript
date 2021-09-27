@@ -5,7 +5,7 @@ import Spinner from "../components/Spinner";
 import { Typography, Button, Link } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
-import { auth } from "../firebase";
+import { auth } from "../firebase.example";
 import { signUp, signIn, updateProfile, signInWithGoogle } from "../api/auth";
 import { loginUser } from "../actions/authActions";
 

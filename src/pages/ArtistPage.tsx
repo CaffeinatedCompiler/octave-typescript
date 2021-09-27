@@ -7,7 +7,7 @@ import Spinner from "../components/Spinner";
 import { useParams } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 
-import { db } from "../firebase";
+import { db } from "../firebase.example";
 
 // Artist Page when user clicks on a Artist card presernt inside Home or Search Page
 function ArtistPage() {

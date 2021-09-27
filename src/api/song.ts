@@ -1,4 +1,4 @@
-import { db, getServerTimeStamp, storage } from "../firebase";
+import { db, getServerTimeStamp, storage } from "../firebase.example";
 
 export const uploadSongToStorage = (file) => {
   const { name } = file;
