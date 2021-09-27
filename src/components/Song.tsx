@@ -1,32 +1,32 @@
-import { useState } from "react";
-import "../styles/Song.css";
-import SnackBar from "./SnackBar";
-import AddPlayListSongModal from "./AddPlayListSongModal";
+import { useState } from 'react'
+import '../styles/Song.css'
+import SnackBar from './SnackBar'
+import AddPlayListSongModal from './AddPlayListSongModal'
 
-import { IconButton, Menu, MenuItem } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
+import { IconButton, Menu, MenuItem } from '@material-ui/core'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite'
 
-import useSongFunctions from "../hooks/useSongFunctions";
+import useSongFunctions from '../hooks/useSongFunctions'
 
 function Song({ data }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [snackBar, setSnackBar] = useState(null);
-  const [isModalOpen, SetIsModalOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [snackBar, setSnackBar] = useState(null)
+  const [isModalOpen, SetIsModalOpen] = useState(false)
   const { playSong, playNext, addToQueue, addToFavourites } = useSongFunctions(
     data,
     setAnchorEl,
     setSnackBar
-  );
+  )
 
   const openOptions = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const openAddSongPlaylistModal = () => {
-    SetIsModalOpen(true);
-    setAnchorEl(false);
-  };
+    SetIsModalOpen(true)
+    setAnchorEl(false)
+  }
 
   return (
     <div className="song">
@@ -39,7 +39,7 @@ function Song({ data }) {
       </p>
       <div className="song__playButton">
         <IconButton className="song__playIcon" onClick={playSong}>
-          <PlayCircleFilledWhiteIcon style={{ fill: "#F22C89" }} />
+          <PlayCircleFilledWhiteIcon style={{ fill: '#F22C89' }} />
         </IconButton>
       </div>
       <div className="song__option">
@@ -67,15 +67,12 @@ function Song({ data }) {
           <MenuItem className="song__optionItem" onClick={addToFavourites}>
             Add To Favourites
           </MenuItem>
-          <MenuItem
-            className="song__optionItem"
-            onClick={openAddSongPlaylistModal}
-          >
+          <MenuItem className="song__optionItem" onClick={openAddSongPlaylistModal}>
             Add To Playlist
           </MenuItem>
         </Menu>
       </div>
-      {snackBar && <SnackBar snackBar={snackBar} setSnackBar={setSnackBar} />}{" "}
+      {snackBar && <SnackBar snackBar={snackBar} setSnackBar={setSnackBar} />}{' '}
       {/* To Show Pop Up messages */}
       {isModalOpen && (
         <AddPlayListSongModal
@@ -85,7 +82,7 @@ function Song({ data }) {
         />
       )}
     </div>
-  );
+  )
 }
 
-export default Song;
+export default Song

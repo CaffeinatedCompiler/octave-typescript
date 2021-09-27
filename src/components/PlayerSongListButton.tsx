@@ -1,25 +1,25 @@
-import { useDispatch } from "react-redux";
-import { IconButton, Tooltip } from "@material-ui/core";
-import QueueMusicIcon from "@material-ui/icons/QueueMusic";
+import { useDispatch } from 'react-redux'
+import { IconButton, Tooltip } from '@material-ui/core'
+import QueueMusicIcon from '@material-ui/icons/QueueMusic'
 
-import { toggleIsSongListOpen } from "../actions/currentSessionActions";
+import { toggleIsSongListOpen } from '../actions/currentSessionActions'
 
 // Toggle SongLIst Button, present inside Player
 function ToggleSongListBtn() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   return (
     <Tooltip title="Show SongList" arrow placement="left">
       <IconButton
         className="player__iconButton player__mainBtn"
         onClick={() => {
-          dispatch(toggleIsSongListOpen());
+          dispatch(toggleIsSongListOpen())
         }}
       >
         <QueueMusicIcon />
       </IconButton>
     </Tooltip>
-  );
+  )
 }
 
-export default ToggleSongListBtn;
+export default ToggleSongListBtn

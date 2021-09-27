@@ -1,16 +1,16 @@
-import { LOGIN_USER, LOGOUT_USER } from "../constants";
+import { LOGIN_USER, LOGOUT_USER } from '../constants'
 
 const reducer = (state = null, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return action.payload;
+      return action.payload
 
     case LOGOUT_USER:
-      return null;
+      return null
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

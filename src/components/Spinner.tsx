@@ -1,4 +1,4 @@
-import { Typography, CircularProgress } from "@material-ui/core";
+import { Typography, CircularProgress } from '@material-ui/core'
 
 function Spinner({ showText = false }) {
   return (
@@ -10,7 +10,7 @@ function Spinner({ showText = false }) {
       )}
       <CircularProgress color="secondary" />
     </div>
-  );
+  )
 }
 
-export default Spinner;
+export default Spinner

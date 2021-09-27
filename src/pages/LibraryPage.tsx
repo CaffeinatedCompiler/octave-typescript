@@ -1,68 +1,64 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import "../styles/Library.css";
-import RecentlyListened from "../components/RecentlyListened";
-import CreatePlaylistModal from "../components/CreatePlaylistModal";
-import SnackBar from "../components/SnackBar";
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import '../styles/Library.css'
+import RecentlyListened from '../components/RecentlyListened'
+import CreatePlaylistModal from '../components/CreatePlaylistModal'
+import SnackBar from '../components/SnackBar'
 
-import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
+import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite'
 
-import { setPlaylists as setPlaylistsToStore } from "../actions/playlistActions";
-import {
-  getFavouriteSongs,
-  getPlaylistSongs,
-  getAllPlaylists,
-} from "../api/playlist";
-import { setNewSong, setSongIndex } from "../actions/currentSessionActions";
+import { setPlaylists as setPlaylistsToStore } from '../actions/playlistActions'
+import { getFavouriteSongs, getPlaylistSongs, getAllPlaylists } from '../api/playlist'
+import { setNewSong, setSongIndex } from '../actions/currentSessionActions'
 
 function Library() {
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const playlists = useSelector((state) => state.playlists);
-  const [isOpen, setIsOpen] = useState(false);
-  const [snackBar, setSnackBar] = useState(null);
+  const user = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const playlists = useSelector((state) => state.playlists)
+  const [isOpen, setIsOpen] = useState(false)
+  const [snackBar, setSnackBar] = useState(null)
 
   useEffect(() => {
     const unsubscribe = getAllPlaylists(user.uid).onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         data: doc.data(),
-      }));
-      dispatch(setPlaylistsToStore(data));
-    });
-    return unsubscribe;
+      }))
+      dispatch(setPlaylistsToStore(data))
+    })
+    return unsubscribe
     //eslint-disable-next-line
-  }, []);
+  }, [])
 
   const playThisPlaylist = (e, id) => {
-    e.stopPropagation();
+    e.stopPropagation()
 
-    const isFavorites = id === "favorites";
-    const payloadId = isFavorites ? user.uid : id;
-    const getSongs = isFavorites ? getFavouriteSongs : getPlaylistSongs;
+    const isFavorites = id === 'favorites'
+    const payloadId = isFavorites ? user.uid : id
+    const getSongs = isFavorites ? getFavouriteSongs : getPlaylistSongs
     getSongs(payloadId)
       .get()
       .then((snapshot) => {
-        const songs = snapshot.docs.map((doc) => doc.data());
+        const songs = snapshot.docs.map((doc) => doc.data())
         if (songs.length > 0) {
-          const [firstSong] = songs;
+          const [firstSong] = songs
           // set the remainingSongs to sessionStorage
-          sessionStorage.setItem("SONG_LIST", JSON.stringify(songs));
+          sessionStorage.setItem('SONG_LIST', JSON.stringify(songs))
           // reset the songIndex and dispatch the first song as the new song
-          dispatch(setSongIndex(0));
-          dispatch(setNewSong(firstSong));
-          setSnackBar("Playlist is playing!");
+          dispatch(setSongIndex(0))
+          dispatch(setNewSong(firstSong))
+          setSnackBar('Playlist is playing!')
         } else {
-          setSnackBar("Playlist Empty!");
+          setSnackBar('Playlist Empty!')
         }
       })
-      .catch((error) => alert(error.message));
-  };
+      .catch((error) => alert(error.message))
+  }
 
-  const goToFavourities = () => history.push("/playlists/favorites");
-  const goToPlaylistPage = (id) => history.push(`/playlists/${id}`);
+  const goToFavourities = () => history.push('/playlists/favorites')
+  const goToPlaylistPage = (id) => history.push(`/playlists/${id}`)
 
   return (
     <div className="library">
@@ -99,8 +95,8 @@ function Library() {
           <p className="library__playlistName">Favourites</p>
           <div className="library__playlistPlayIcon">
             <PlayCircleFilledWhiteIcon
-              style={{ fill: "#F22C89" }}
-              onClick={(e) => playThisPlaylist(e, "favorites")}
+              style={{ fill: '#F22C89' }}
+              onClick={(e) => playThisPlaylist(e, 'favorites')}
             />
           </div>
         </div>
@@ -112,15 +108,11 @@ function Library() {
             onClick={() => goToPlaylistPage(playlist.id)}
             className="library__playlist"
           >
-            <img
-              src={playlist.data.imageUrl}
-              alt=""
-              className="library__playlistFavouritesImg"
-            />
+            <img src={playlist.data.imageUrl} alt="" className="library__playlistFavouritesImg" />
             <p className="library__playlistName">{playlist.data.name}</p>
             <div className="library__playlistPlayIcon">
               <PlayCircleFilledWhiteIcon
-                style={{ fill: "#F22C89" }}
+                style={{ fill: '#F22C89' }}
                 onClick={(e) => playThisPlaylist(e, playlist.id)}
               />
             </div>
@@ -129,13 +121,9 @@ function Library() {
       </div>
       {snackBar && <SnackBar snackBar={snackBar} setSnackBar={setSnackBar} />}
       {/* To Show Pop Up messages */}
-      <CreatePlaylistModal
-        isOpen={isOpen}
-        closeModal={() => setIsOpen(false)}
-        uid={user.uid}
-      />
+      <CreatePlaylistModal isOpen={isOpen} closeModal={() => setIsOpen(false)} uid={user.uid} />
     </div>
-  );
+  )
 }
 
-export default Library;
+export default Library

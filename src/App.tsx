@@ -1,31 +1,29 @@
-import { Suspense, lazy } from "react";
-import { Switch, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import "./styles/App.css";
+import { Suspense, lazy } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import './styles/App.css'
 
 // Components
-import Navbar from "./components/Navbar";
-import Player from "./components/Player";
-import SongList from "./components/SongList";
-import Spinner from "./components/Spinner";
-import Error404Page from "./components/Error404";
+import Navbar from './components/Navbar'
+import Player from './components/Player'
+import SongList from './components/SongList'
+import Spinner from './components/Spinner'
+import Error404Page from './components/Error404'
 
 // Pages
-import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
-const ArtistPage = lazy(() => import("./pages/ArtistPage"));
-const PlayListPage = lazy(() => import("./pages/PlayListPage"));
-const LibraryPage = lazy(() => import("./pages/LibraryPage"));
-const AdminPage = lazy(() => import("./pages/AdminPage"));
-const SearchPage = lazy(() => import("./pages/SearchPage"));
+import LoginPage from './pages/LoginPage'
+import HomePage from './pages/HomePage'
+const ArtistPage = lazy(() => import('./pages/ArtistPage'))
+const PlayListPage = lazy(() => import('./pages/PlayListPage'))
+const LibraryPage = lazy(() => import('./pages/LibraryPage'))
+const AdminPage = lazy(() => import('./pages/AdminPage'))
+const SearchPage = lazy(() => import('./pages/SearchPage'))
 
 function App() {
-  const user = useSelector((state) => state.user);
-  const { isSongListOpen, playingSong } = useSelector(
-    (state) => state.currentSession
-  );
+  const user = useSelector((state) => state.user)
+  const { isSongListOpen, playingSong } = useSelector((state) => state.currentSession)
 
-  const showPlayer = window.location.pathname !== "/admin" && playingSong;
+  const showPlayer = window.location.pathname !== '/admin' && playingSong
 
   return (
     <div className="app">
@@ -54,7 +52,7 @@ function App() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

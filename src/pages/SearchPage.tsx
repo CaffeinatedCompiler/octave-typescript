@@ -1,56 +1,51 @@
-import { useState, useEffect } from "react";
-import "../styles/Search.css";
-import PlayListSong from "../components/PlayListSong";
-import Artist from "../components/Artist";
-import {
-  TextField,
-  IconButton,
-  InputAdornment,
-  Typography,
-} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+import { useState, useEffect } from 'react'
+import '../styles/Search.css'
+import PlayListSong from '../components/PlayListSong'
+import Artist from '../components/Artist'
+import { TextField, IconButton, InputAdornment, Typography } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
 
-import { capitalize, capitalizeAllWords } from "../utils/common";
-import { searchArtist } from "../api/artist";
-import { searchSong } from "../api/song";
+import { capitalize, capitalizeAllWords } from '../utils/common'
+import { searchArtist } from '../api/artist'
+import { searchSong } from '../api/song'
 
 // Search Page
 function Search() {
-  const [input, setInput] = useState("");
-  const [infoText, setInfoText] = useState("");
-  const [songs, setSongs] = useState(null);
-  const [artists, setArtists] = useState(null);
+  const [input, setInput] = useState('')
+  const [infoText, setInfoText] = useState('')
+  const [songs, setSongs] = useState(null)
+  const [artists, setArtists] = useState(null)
 
   useEffect(() => {
-    setInfoText("");
-  }, [input]);
+    setInfoText('')
+  }, [input])
 
   const handleSearch = async (event) => {
-    event.preventDefault();
-    if (!input) return;
+    event.preventDefault()
+    if (!input) return
 
-    let searchText = capitalize(input);
+    let searchText = capitalize(input)
     await searchSong(searchText).then((snapshot) => {
       setSongs(
         snapshot.docs.map((doc) => ({
           id: doc.id,
           data: doc.data(),
         }))
-      );
-    });
+      )
+    })
 
-    searchText = capitalizeAllWords(input);
+    searchText = capitalizeAllWords(input)
     await searchArtist(searchText).then((snapshot) => {
       setArtists(
         snapshot.docs.map((doc) => ({
           id: doc.id,
           data: doc.data(),
         }))
-      );
-    });
+      )
+    })
 
-    setInfoText(`Search Result for ${input}`);
-  };
+    setInfoText(`Search Result for ${input}`)
+  }
 
   return (
     <div className="search">
@@ -68,10 +63,7 @@ function Search() {
             InputProps={{
               endAdornment: (
                 <InputAdornment>
-                  <IconButton
-                    className="search__barSearchIcon"
-                    onClick={handleSearch}
-                  >
+                  <IconButton className="search__barSearchIcon" onClick={handleSearch}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -87,10 +79,7 @@ function Search() {
       </Typography>
 
       <Typography variant="subtitle1" align="center">
-        {songs?.length === 0 &&
-          artists?.length === 0 &&
-          infoText &&
-          `No Results`}
+        {songs?.length === 0 && artists?.length === 0 && infoText && `No Results`}
       </Typography>
 
       {/* Songs Results ------------------------*/}
@@ -98,9 +87,7 @@ function Search() {
 
       <div className="search__grid">
         {songs?.length > 0 &&
-          songs.map((song) => (
-            <PlayListSong key={song.id} data={song.data} fromSearchPage />
-          ))}
+          songs.map((song) => <PlayListSong key={song.id} data={song.data} fromSearchPage />)}
       </div>
 
       <br />
@@ -110,12 +97,10 @@ function Search() {
 
       <div className="search__results">
         {artists?.length > 0 &&
-          artists.map((artist) => (
-            <Artist key={artist.id} id={artist.id} data={artist.data} />
-          ))}
+          artists.map((artist) => <Artist key={artist.id} id={artist.id} data={artist.data} />)}
       </div>
     </div>
-  );
+  )
 }
 
-export default Search;
+export default Search

@@ -1,20 +1,20 @@
-import { Paper, Tab, Tabs } from "@material-ui/core";
-import { useEffect, useState } from "react";
-import { getArtists } from "../api/artist";
-import ArtistForm from "../components/ArtistForm";
-import SongForm from "../components/SongForm";
-import "../styles/Admin.css";
+import { Paper, Tab, Tabs } from '@material-ui/core'
+import { useEffect, useState } from 'react'
+import { getArtists } from '../api/artist'
+import ArtistForm from '../components/ArtistForm'
+import SongForm from '../components/SongForm'
+import '../styles/Admin.css'
 
 function Admin() {
-  const [tab, setTab] = useState(0);
-  const [artists, setArtists] = useState([]);
+  const [tab, setTab] = useState(0)
+  const [artists, setArtists] = useState([])
 
   useEffect(() => {
     const unsubscribe = getArtists().onSnapshot((snapshot) => {
-      setArtists(snapshot.docs.map((doc) => doc.data().name));
-    });
-    return unsubscribe;
-  }, []);
+      setArtists(snapshot.docs.map((doc) => doc.data().name))
+    })
+    return unsubscribe
+  }, [])
 
   return (
     <div className="admin">
@@ -41,7 +41,7 @@ function Admin() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default Admin;
+export default Admin

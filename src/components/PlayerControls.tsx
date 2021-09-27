@@ -1,30 +1,20 @@
-;
-
-import PlayCircleFilledWhiteOutlinedIcon from "@material-ui/icons/PlayCircleFilledWhiteOutlined";
-import PauseCircleOutlineRoundedIcon from "@material-ui/icons/PauseCircleOutlineRounded";
-import SkipPreviousRoundedIcon from "@material-ui/icons/SkipPreviousRounded";
-import SkipNextRoundedIcon from "@material-ui/icons/SkipNextRounded";
-import { IconButton, CircularProgress } from "@material-ui/core";
+import PlayCircleFilledWhiteOutlinedIcon from '@material-ui/icons/PlayCircleFilledWhiteOutlined'
+import PauseCircleOutlineRoundedIcon from '@material-ui/icons/PauseCircleOutlineRounded'
+import SkipPreviousRoundedIcon from '@material-ui/icons/SkipPreviousRounded'
+import SkipNextRoundedIcon from '@material-ui/icons/SkipNextRounded'
+import { IconButton, CircularProgress } from '@material-ui/core'
 
 // Play/Pause, previous , next Buttons
-function PlayerControls({
-  playPreviousSong,
-  playPauseSong,
-  playing,
-  playNextSong,
-}) {
+function PlayerControls({ playPreviousSong, playPauseSong, playing, playNextSong }) {
   return (
     <div className="playercontrols">
-      <IconButton
-        onClick={playPreviousSong}
-        className="player__iconButton player__iconPrevBtn"
-      >
+      <IconButton onClick={playPreviousSong} className="player__iconButton player__iconPrevBtn">
         <SkipPreviousRoundedIcon />
       </IconButton>
 
       <IconButton
         onClick={() => {
-          if (playing !== -1) playPauseSong();
+          if (playing !== -1) playPauseSong()
         }}
         className="player__iconButton player__mainBtn"
       >
@@ -41,7 +31,7 @@ function PlayerControls({
         <SkipNextRoundedIcon />
       </IconButton>
     </div>
-  );
+  )
 }
 
-export default PlayerControls;
+export default PlayerControls

@@ -1,35 +1,34 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import "../styles/row.css";
-import Artist from "./Artist";
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import '../styles/row.css'
+import Artist from './Artist'
 
-import { CircularProgress } from "@material-ui/core";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { CircularProgress } from '@material-ui/core'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-import useMoveLeftRight from "../hooks/useMoveLeftRight";
-import { getRecentArtists } from "../api/artist";
-import { setArtists } from "../actions/artistsActions";
+import useMoveLeftRight from '../hooks/useMoveLeftRight'
+import { getRecentArtists } from '../api/artist'
+import { setArtists } from '../actions/artistsActions'
 
 // A Row of Artist present inside Home Page
 function ArtistsList() {
-  const artists = useSelector((state) => state.artists);
-  const dispatch = useDispatch();
-  const { leftBtn, rightBtn, scrollLeft, scrollRight, lastNodeRef, rowRef } =
-    useMoveLeftRight();
+  const artists = useSelector((state) => state.artists)
+  const dispatch = useDispatch()
+  const { leftBtn, rightBtn, scrollLeft, scrollRight, lastNodeRef, rowRef } = useMoveLeftRight()
 
   useEffect(() => {
-    if (artists.length !== 0) return;
+    if (artists.length !== 0) return
 
     getRecentArtists().then((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         data: doc.data(),
-      }));
-      dispatch(setArtists(data));
-    });
+      }))
+      dispatch(setArtists(data))
+    })
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch])
 
   return (
     <div className="row user-select-none">
@@ -41,9 +40,9 @@ function ArtistsList() {
       ) : (
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "8rem 0",
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '8rem 0',
           }}
         >
           <CircularProgress color="secondary" />
@@ -52,9 +51,7 @@ function ArtistsList() {
 
       <div className="row__songsContainer">
         <div className="row__leftButtonDiv" onClick={scrollLeft}>
-          {leftBtn && (
-            <ChevronLeftIcon fontSize="large" className="row__icon" />
-          )}
+          {leftBtn && <ChevronLeftIcon fontSize="large" className="row__icon" />}
         </div>
 
         <div ref={rowRef} className="row__songs">
@@ -70,13 +67,11 @@ function ArtistsList() {
         </div>
 
         <div className="row__rightButtonDiv" onClick={scrollRight}>
-          {rightBtn && (
-            <ChevronRightIcon fontSize="large" className="row__icon" />
-          )}
+          {rightBtn && <ChevronRightIcon fontSize="large" className="row__icon" />}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ArtistsList;
+export default ArtistsList

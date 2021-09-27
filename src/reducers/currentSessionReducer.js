@@ -6,14 +6,14 @@ import {
   DEC_SONG_INDEX,
   // SET_ARTIST,
   TOGGLE_IS_SONGLIST_OPEN,
-} from "../constants";
+} from '../constants'
 
 const initialState = {
   playingSong: null,
   newSong: null,
   songIndex: -1,
   isSongListOpen: false,
-};
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,30 +21,30 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         playingSong: action.payload,
-      };
+      }
 
     case SET_NEW_SONG:
       return {
         ...state,
         newSong: action.payload,
-      };
+      }
     case SET_SONG_INDEX:
       return {
         ...state,
         songIndex: action.payload,
-      };
+      }
 
     case INC_SONG_INDEX:
       return {
         ...state,
         songIndex: state.songIndex + 1,
-      };
+      }
 
     case DEC_SONG_INDEX:
       return {
         ...state,
         songIndex: state.songIndex - 1,
-      };
+      }
 
     // case SET_ARTIST:
     //   return {
@@ -56,11 +56,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isSongListOpen: !state.isSongListOpen,
-      };
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

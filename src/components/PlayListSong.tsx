@@ -1,14 +1,14 @@
-import { useState } from "react";
-import "../styles/PlayListSong.css";
-import SnackBar from "./SnackBar";
-import AddPlayListSongModal from "./AddPlayListSongModal";
+import { useState } from 'react'
+import '../styles/PlayListSong.css'
+import SnackBar from './SnackBar'
+import AddPlayListSongModal from './AddPlayListSongModal'
 
-import { IconButton, Menu, MenuItem } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton, Menu, MenuItem } from '@material-ui/core'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import DeleteIcon from '@material-ui/icons/Delete'
 
-import useSongFunctions from "../hooks/useSongFunctions";
+import useSongFunctions from '../hooks/useSongFunctions'
 
 // Rectangular Song component used in ArtistPage, SearchPage, PlaylistPage, SongList, AllSongs
 function PlayListSong({
@@ -22,36 +22,32 @@ function PlayListSong({
   collectionName, // what collection is this song from (favourites or playlistsong)
   removeFromSongList,
 }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [snackBar, setSnackBar] = useState(null);
-  const [isModalOpen, SetIsModalOpen] = useState(false);
-  const {
-    playSong,
-    playNext,
-    addToQueue,
-    removeFromPlaylist,
-    addToFavourites,
-  } = useSongFunctions(data, setAnchorEl, setSnackBar);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [snackBar, setSnackBar] = useState(null)
+  const [isModalOpen, SetIsModalOpen] = useState(false)
+  const { playSong, playNext, addToQueue, removeFromPlaylist, addToFavourites } = useSongFunctions(
+    data,
+    setAnchorEl,
+    setSnackBar
+  )
 
   const removeSongFunc = () => {
-    if (fromPlaylistPage) removeFromPlaylist(collectionName, id);
-    else removeFromSongList(data);
-    setAnchorEl(false);
-  };
+    if (fromPlaylistPage) removeFromPlaylist(collectionName, id)
+    else removeFromSongList(data)
+    setAnchorEl(false)
+  }
 
   const openOptions = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const openAddSongPlaylistModal = () => {
-    SetIsModalOpen(true);
-    setAnchorEl(false);
-  };
+    SetIsModalOpen(true)
+    setAnchorEl(false)
+  }
 
   return (
-    <div
-      className={isPlayingSong ? "playlistsong playing-song" : "playlistsong"}
-    >
+    <div className={isPlayingSong ? 'playlistsong playing-song' : 'playlistsong'}>
       <img src={data.imageUrl} alt="" className="playlistsong__img" />
       <div className="playlistsong__info">
         <p className="playlistsong__infoName" title={data.name}>
@@ -69,10 +65,7 @@ function PlayListSong({
           </IconButton>
           {/* if it is from SongList, show remove the button */}
           {fromSongList && (
-            <IconButton
-              className="playlistsong__optionsIcon"
-              onClick={removeSongFunc}
-            >
+            <IconButton className="playlistsong__optionsIcon" onClick={removeSongFunc}>
               <DeleteIcon />
             </IconButton>
           )}
@@ -98,39 +91,24 @@ function PlayListSong({
               open={Boolean(anchorEl)}
               onClose={() => setAnchorEl(false)}
             >
-              <MenuItem
-                className="playlistsong__optionsItem"
-                onClick={playNext}
-              >
+              <MenuItem className="playlistsong__optionsItem" onClick={playNext}>
                 Play Next
               </MenuItem>
-              <MenuItem
-                className="playlistsong__optionsItem"
-                onClick={addToQueue}
-              >
+              <MenuItem className="playlistsong__optionsItem" onClick={addToQueue}>
                 Add to Queue
               </MenuItem>
               {/* If this is from PlaylistPage then show the remove button */}
               {fromPlaylistPage ? (
-                <MenuItem
-                  className="playlistsong__optionsItem"
-                  onClick={removeSongFunc}
-                >
+                <MenuItem className="playlistsong__optionsItem" onClick={removeSongFunc}>
                   Remove
                 </MenuItem>
               ) : (
                 // if this is from SearchPage or ArtistPage then show these below
                 <div>
-                  <MenuItem
-                    className="playlistsong__optionsItem"
-                    onClick={addToFavourites}
-                  >
+                  <MenuItem className="playlistsong__optionsItem" onClick={addToFavourites}>
                     add To Favourites
                   </MenuItem>
-                  <MenuItem
-                    className="song__optionItem"
-                    onClick={openAddSongPlaylistModal}
-                  >
+                  <MenuItem className="song__optionItem" onClick={openAddSongPlaylistModal}>
                     Add To Playlist
                   </MenuItem>
                 </div>
@@ -154,7 +132,7 @@ function PlayListSong({
         />
       )}
     </div>
-  );
+  )
 }
 
-export default PlayListSong;
+export default PlayListSong

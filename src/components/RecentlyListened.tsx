@@ -1,19 +1,18 @@
-import { useState } from "react";
-import "../styles/row.css";
-import Song from "./Song";
+import { useState } from 'react'
+import '../styles/row.css'
+import Song from './Song'
 
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-import useMoveLeftRight from "../hooks/useMoveLeftRight";
-import { getRecentSongsLocalStorage } from "../utils/song-utils";
+import useMoveLeftRight from '../hooks/useMoveLeftRight'
+import { getRecentSongsLocalStorage } from '../utils/song-utils'
 
 function RecentlyListened() {
-  const [recentPlayedSongs] = useState(getRecentSongsLocalStorage);
-  const { leftBtn, rightBtn, scrollLeft, scrollRight, lastNodeRef, rowRef } =
-    useMoveLeftRight();
+  const [recentPlayedSongs] = useState(getRecentSongsLocalStorage)
+  const { leftBtn, rightBtn, scrollLeft, scrollRight, lastNodeRef, rowRef } = useMoveLeftRight()
 
-  if (recentPlayedSongs.length <= 0) return null;
+  if (recentPlayedSongs.length <= 0) return null
 
   return (
     <div className="row user-select-none">
@@ -24,9 +23,7 @@ function RecentlyListened() {
 
       <div className="row__songsContainer">
         <div className="row__leftButtonDiv" onClick={scrollLeft}>
-          {leftBtn && (
-            <ChevronLeftIcon fontSize="large" className="row__icon" />
-          )}
+          {leftBtn && <ChevronLeftIcon fontSize="large" className="row__icon" />}
         </div>
 
         <div ref={rowRef} className="row__songs">
@@ -42,12 +39,10 @@ function RecentlyListened() {
         </div>
 
         <div className="row__rightButtonDiv" onClick={scrollRight}>
-          {rightBtn && (
-            <ChevronRightIcon fontSize="large" className="row__icon" />
-          )}
+          {rightBtn && <ChevronRightIcon fontSize="large" className="row__icon" />}
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default RecentlyListened;
+export default RecentlyListened

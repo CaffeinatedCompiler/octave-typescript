@@ -1,26 +1,26 @@
-import { useState, useEffect, useRef } from "react";
-import "../styles/Login.css";
-import ForgotPassword from "../components/ForgotPassword";
-import Spinner from "../components/Spinner";
-import { Typography, Button, Link } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useState, useEffect, useRef } from 'react'
+import '../styles/Login.css'
+import ForgotPassword from '../components/ForgotPassword'
+import Spinner from '../components/Spinner'
+import { Typography, Button, Link } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 
-import { auth } from "../firebase.example";
-import { signUp, signIn, updateProfile, signInWithGoogle } from "../api/auth";
-import { loginUser } from "../actions/authActions";
+import { auth } from '../firebase.example'
+import { signUp, signIn, updateProfile, signInWithGoogle } from '../api/auth'
+import { loginUser } from '../actions/authActions'
 
 function Login() {
-  const [isLogin, setIsLogin] = useState(true); // to keep track of whether the user is trying to login or Signup
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState(null);
-  const formRef = useRef();
-  const dispatch = useDispatch();
-  const [open, setOpen] = useState(false); // To handle ForgotPassword Component
+  const [isLogin, setIsLogin] = useState(true) // to keep track of whether the user is trying to login or Signup
+  const [loading, setLoading] = useState(true)
+  const [err, setErr] = useState(null)
+  const formRef = useRef()
+  const dispatch = useDispatch()
+  const [open, setOpen] = useState(false) // To handle ForgotPassword Component
 
   // Setting Up a Listener, that will keep listening for AuthChange events
   useEffect(() => {
     // clear the sessionStorage, (to make sure everything is clean even if the user tries to refrest the page)
-    sessionStorage.removeItem("SONG_LIST");
+    sessionStorage.removeItem('SONG_LIST')
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       // If the authChange gives the logged in user,
       if (authUser) {
@@ -29,51 +29,51 @@ function Login() {
           email: authUser.email,
           displayName: authUser.displayName,
           photoURL: authUser.photoURL,
-        };
-        dispatch(loginUser(user));
+        }
+        dispatch(loginUser(user))
       } else {
-        setLoading(false);
+        setLoading(false)
       }
-    });
+    })
 
-    return () => unsubscribe();
-  }, [dispatch]);
+    return () => unsubscribe()
+  }, [dispatch])
 
   // EveryTime User switches between Login and Sign Up reset all the InputFields
   useEffect(() => {
-    if (loading) return;
-    formRef.current.email.value = "";
-    formRef.current.password.value = "";
-    setErr(null); // reset the error State
-  }, [isLogin, loading]);
+    if (loading) return
+    formRef.current.email.value = ''
+    formRef.current.password.value = ''
+    setErr(null) // reset the error State
+  }, [isLogin, loading])
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const data = {
       email: formRef.current.email.value,
       password: formRef.current.password.value,
-    };
+    }
 
     try {
       if (isLogin) {
         // If the User is trying to Log In
-        await signIn(data.email, data.password);
+        await signIn(data.email, data.password)
       } else {
         // If the User is trying to Sign UP
-        data.name = formRef.current.name.value;
-        data.photoURL = formRef.current.photoURL.value;
-        const userAuth = await signUp(data.email, data.password);
-        console.log(userAuth.user);
-        await updateProfile(userAuth, data.name, data.photoURL);
+        data.name = formRef.current.name.value
+        data.photoURL = formRef.current.photoURL.value
+        const userAuth = await signUp(data.email, data.password)
+        console.log(userAuth.user)
+        await updateProfile(userAuth, data.name, data.photoURL)
       }
     } catch (error) {
-      setErr(error);
-      formRef.current.password.value = "";
+      setErr(error)
+      formRef.current.password.value = ''
     }
-  };
+  }
 
   if (loading) {
-    return <Spinner showText={true} />;
+    return <Spinner showText={true} />
   }
 
   return (
@@ -83,15 +83,10 @@ function Login() {
       </Typography>
       <div className="login__wrapper user-select-none">
         <Typography align="center" variant="h5">
-          {isLogin ? "SIGN IN" : "SIGN UP"}
+          {isLogin ? 'SIGN IN' : 'SIGN UP'}
         </Typography>
 
-        <form
-          className="login__form"
-          onSubmit={handleFormSubmit}
-          autoComplete="off"
-          ref={formRef}
-        >
+        <form className="login__form" onSubmit={handleFormSubmit} autoComplete="off" ref={formRef}>
           {!isLogin && (
             <div className="login__formGroup">
               <input
@@ -143,14 +138,9 @@ function Login() {
           </div>
 
           <div className="login__formGroup">
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              disabled={loading}
-            >
+            <Button type="submit" variant="contained" color="secondary" disabled={loading}>
               <Typography align="center" variant="subtitle1">
-                {isLogin ? "Sign In" : "Sign Up"}
+                {isLogin ? 'Sign In' : 'Sign Up'}
               </Typography>
             </Button>
           </div>
@@ -164,12 +154,7 @@ function Login() {
           {/* Sign In With Google  */}
           <div className="login__formGroup">
             {isLogin && (
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={signInWithGoogle}
-              >
+              <Button variant="contained" color="primary" size="small" onClick={signInWithGoogle}>
                 <Typography align="center" variant="subtitle1">
                   Sign In With Google
                 </Typography>
@@ -195,7 +180,7 @@ function Login() {
         {/* Already Have an Account  OR  New? Create an Account*/}
         {!isLogin ? (
           <Typography align="center" variant="body2">
-            {" "}
+            {' '}
             Already Have an Account &nbsp;
             <Link
               component="button"
@@ -208,7 +193,7 @@ function Login() {
           </Typography>
         ) : (
           <Typography align="center" variant="body2">
-            {" "}
+            {' '}
             New? Create an Account &nbsp;
             <Link
               component="button"
@@ -224,7 +209,7 @@ function Login() {
       {/* ForgotPassword Component (Dialog Box modal) */}
       <ForgotPassword open={open} setOpen={setOpen} />
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
