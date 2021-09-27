@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/Artist.css";
 import { useHistory } from "react-router-dom";
 

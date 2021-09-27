@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { IconButton, Tooltip } from "@material-ui/core";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";

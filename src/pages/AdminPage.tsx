@@ -1,12 +1,12 @@
 import { Paper, Tab, Tabs } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getArtists } from "../api/artist";
 import ArtistForm from "../components/ArtistForm";
 import SongForm from "../components/SongForm";
 import "../styles/Admin.css";
 
 function Admin() {
-  const [tab, setTab] = React.useState(0);
+  const [tab, setTab] = useState(0);
   const [artists, setArtists] = useState([]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../styles/Login.css";
 import ForgotPassword from "../components/ForgotPassword";
 import Spinner from "../components/Spinner";
@@ -15,7 +15,7 @@ function Login() {
   const [err, setErr] = useState(null);
   const formRef = useRef();
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false); // To handle ForgotPassword Component
+  const [open, setOpen] = useState(false); // To handle ForgotPassword Component
 
   // Setting Up a Listener, that will keep listening for AuthChange events
   useEffect(() => {

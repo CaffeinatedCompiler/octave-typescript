@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/Search.css";
 import PlayListSong from "../components/PlayListSong";
 import Artist from "../components/Artist";

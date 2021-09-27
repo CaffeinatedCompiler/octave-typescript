@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/Home.css";
 import { useSelector } from "react-redux";
 import NewReleases from "../components/NewReleases";

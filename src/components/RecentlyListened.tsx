@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/row.css";
 import Song from "./Song";
 
@@ -19,7 +19,7 @@ function RecentlyListened() {
     <div className="row user-select-none">
       <div className="row__headerText">
         <h2>Recently Activity</h2>
-        <h4 style={{ fontWeight: "500" }}>Your Daily Music </h4>
+        <h4 style={{ fontWeight: 500 }}>Your Daily Music </h4>
       </div>
 
       <div className="row__songsContainer">

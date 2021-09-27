@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/Error404Page.css";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
